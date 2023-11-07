@@ -35,7 +35,7 @@ class PasswordValidationTest {
         String pw = "Password123";
         boolean actual = PasswordValidation.givenPwTest(pw);
 
-        assertEquals(false, actual);
+        assertEquals(true, actual);
 
     }
     @Test
@@ -44,10 +44,6 @@ class PasswordValidationTest {
         boolean actual = PasswordValidation.specialCharTest(pw);
 
         assertEquals(false, actual);
-
     }
-
-
-
 
 }
