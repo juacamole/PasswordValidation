@@ -5,23 +5,45 @@ import java.util.Scanner;
 public class PasswordValidation {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String pw = sc.next();
-        boolean lenghIf = lenghTest(pw);
+        String pw = "";
+        boolean  lengthIf;
+        boolean numIf;
+        boolean upperLowercaseTest;
+        boolean originalPw;
+        boolean specialChar;
 
-        boolean numIf = numberTest(pw);
+        //Engine
+        System.out.println("Hello, would you like write your own password or generate one?");
+        String input = sc.nextLine();
+        if (input.equals("Generate")){
+            System.out.println("great, how long would you like  the password to be?");
+            do {
+                System.out.print("Please enter the length of you password: ");
+                int length = sc.nextInt();
+                pw = pwGenerator(length,pw);
+            } while (pw.equals("zu kurz"));
+            System.out.print("Here is your Password:     ");
+            System.out.print(pw);
+            } else
+            do {
+                System.out.println("Your password has to meet the criteria:");
+                System.out.println("Atleast 8 Characters long");
+                System.out.println("You have  to includeUppercase and Lowercase Characters");
+                System.out.println("You have to include atleast one number");
+                System.out.println("You have to include atleast one special character");
+                System.out.println("You may not use a simple password");
+                System.out.print("Write your password here: ");
+                pw = sc.next();
+                lengthIf = lenghTest(pw);
+                numIf = numberTest(pw);
+                upperLowercaseTest = UpperLowercaseTest(pw);
+                originalPw = givenPwTest(pw);
+                specialChar = specialCharTest(pw);
+            }while (!lengthIf && !numIf && !upperLowercaseTest && originalPw && specialChar);
+            System.out.println("Great, you have succesfully created a password");
+        }
 
-        boolean upperLowercaseTest = UpperLowercaseTest(pw);
 
-        boolean originalPw = givenPwTest(pw);
-
-        boolean specialChar= specialCharTest(pw);
-
-        System.out.println(pw);
-        int lengh = sc.nextInt();
-        pw = pwGenerator(lengh,pw);
-        System.out.println(pw);
-
-    }
 
     public static boolean lenghTest(String pw) {
         return pw.length() >= 8;
@@ -63,14 +85,14 @@ public class PasswordValidation {
         return pw.matches(".*[^a-zA-Z0-9].*");
     }
 
-    public static String pwGenerator(int lengh, String pw) {
+    public static String pwGenerator(int length, String pw) {
         int random = 0;
-        if (lengh >=  8) {
+        if (length >=  8) {
             char[] randomPw;
             do {
-                randomPw = new char[lengh + 1];
+                randomPw = new char[length + 1];
 
-                for (int i = 0; i <= lengh; i++) {
+                for (int i = 0; i <= length; i++) {
                     random = (int) (Math.random() * 62 + 1);
 
                     switch (random) {
